@@ -2,7 +2,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const inviteRoutes = require('./routes/invite'); // Adjust path as necessary
-const userRoutes = require('./routes/user');     // Import user routes
+const userRoutes = require('./routes/user');    
+const projectRoutes = require('./routes/project'); // Import project routes
+ // Import user routes
 require('dotenv').config();
 
 const app = express();
@@ -20,8 +22,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch(err => console.log("Error connecting to MongoDB", err));
 
 // Set up routes with a consistent base path
-app.use('/api/invite', inviteRoutes);
+app.use('/api', inviteRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/projects', projectRoutes); // Use project routes
 
 // Start the server
 app.listen(PORT, () => {
